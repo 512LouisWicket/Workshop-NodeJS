@@ -1,23 +1,25 @@
 # NodeJS Workshop
 
-## 1. Présentation NodeJS
+## [1. Présentation NodeJS](/Parcours/1.%20Introduction%20à%20Node.js.md)
 
 - historique
 - langage asynchrone
 
-## 2. Préparation Environnement
+## 2. [Préparation Environnement](/Parcours/2.%20Mise%20en%20place%20de%20l’environnement.md)
+
 
 - Git
-
   - Fork & GitClone le repo du workshop
   - .gitignore
+
+- Docker
 
 - NPM
   - Qu'est-ce que NPM ?
   - Comment utiliser NPM ?
   - NPM install
 
-## 3. Creation du serveur
+## 3. [Creation du serveur](/Parcours/3.%20Création%20d’un%20premier%20serveur.md)
 
 - Module
     - comment cherche dans la doc
@@ -27,7 +29,7 @@
   - Parler des ports systèmes : besoin de SUDO pour le 80
   - console.log sur la requête serveur pour voir la tête de la requête
 
-## 4. Router ses premières pages
+## 4. [Router ses premières pages](/Parcours/4.%20Routage.md)
 
 - Comment servir une page ?
     - Require module filesystem : "fs"
@@ -59,35 +61,7 @@
             - récupérer le formulaire sous forme de JSON
             - Expliquer le concept de sanitization et sanitizer (Un snippet de sanitization est fourni)
     
-    ## 5. Socket.IO
+    ## 5. [Socket.IO](/Parcours/5.%20Socket.IO.md)
 
+    - Qu'est-ce qu'un socket
     - Installer Socket.io
-    - 
-
-    ## Myworkforce et Wesmart
-    - Python (très peu de chance)
-        - (Flask)
-    - GULP
-    - YARN
-    - API REST
-    - NODEJS (peu)
-    - PHP
-        - LARAVEL (principal)
-    - SASS
-        - + Suzie
-    - WEBPACK
-    - VUE.JS (peu)
-        - + NUXT
-    - ZAPPIER (linker des api)
-    - (arduino)
-    - Wordpress
-
-
-        
-        
-        
-        
-        - GET, POST
-        - Status Code
-
-
