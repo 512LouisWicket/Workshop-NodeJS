@@ -29,7 +29,7 @@
   - Parler des ports systèmes : besoin de SUDO pour le 80
   - console.log sur la requête serveur pour voir la tête de la requête
 
-## [4. Router ses premières pages](/Parcours/4.%20Routage.md)
+## [4. Servir ses premières pages](/Parcours/4.%20Routage.md)
 
 ### 4.1
 
@@ -47,31 +47,26 @@
         - Pas de style, c'est normal
     - Routage page 404
         - hardcoder le html sous forme de string
+        – les status codes (404, 200, 418)
+
 
 ### 4.3
 
-- Les Status Code 
-    - 200
-    - 404
-    - 418 
-
-### 4.4
-
-#### 4.4.1
+#### 4.3.1
 
 - Apprendre à servir les assets
     - Ajouter le link dans l'HTML et constater que c'est insuffisant
     - Type mimes et gestion -> servir en fonction du type Mimes
     - montrer le snippet en Express.js (plus rapide)
 
-#### 4.4.2
+#### 4.3.2
 
 - Ajouter une image de chat
     - dans le serveur 
     - ajouter l'image à l'html
     - servir l'image
 
-#### 4.4.3
+#### 4.3.3
 
 - Prendre en charge le form fourni
     - requête POST
