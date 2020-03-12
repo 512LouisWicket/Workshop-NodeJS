@@ -1,16 +1,14 @@
 "use strict";
 
-// Ton code ici
-
 const http = require("http");
 const server = http.createServer();
 
-server.listen(8080, () => console.log("serveur a démarré"));
+server.listen(8080, () => console.log("le serveur a démarré !"));
 
-server.on("request", (req, res) => {
-    console.log(req);
-    console.log(req.url);
-    console.log(req.method);
-    res.writeHead(200, {"Content-Type": "text/html; charset=UTF-8"});
-    res.end("<h1>Hello World</h1>");
+server.on("request", (request, response) => {
+    console.log(request.url);
+    console.log(request.method);
+    response.writeHead(200, "Salut ! XDDD", { "Content-Type": "text/html; charset=UTF-8" });
+    response.write("<p>Salut</p>");
+    response.end("<p>ça va ?</p>");
 });

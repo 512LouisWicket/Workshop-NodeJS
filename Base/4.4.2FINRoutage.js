@@ -1,57 +1,49 @@
 "use strict";
 
-// Ton code ici
-
 const http = require("http");
-const fs = require("fs");
 const server = http.createServer();
-const {parse} = require("url");
-let index = fs.readFileSync('index.html', 'utf8');
+const fs = require("fs");
 const path = require("path");
 
-server.listen(8080, () => console.log("serveur a démarré"));
+const MIMETypes = { ".png": "image/png", ".html": "text/html", ".ico": "image/x-icon", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".js": "application/javascript", ".json": "application/json", ".css": "text/css" };
 
-const MIMEtypes = {'.css': 'text/css', '.jpg': 'image/png'}
+server.listen(8080, () => console.log("le serveur a démarré !"));
 
-server.on("request", (req, res) => {
-    const url = parse(req.url);
-    const uri = url.pathname;
-    console.log(req.url);
-    switch (req.method) {
-        case 'GET':
-        const extension = path.extname(uri);
-        if (!extension)
-        {
-            if (req.url === '/')
-            {
-                res.writeHead(200, {"Content-Type": "text/html; charset=UTF-8"});
-                fs.createReadStream(path.join(__dirname, 'public', 'index.html')).pipe(res);
+server.on("request", (request, response) => {
+    console.log(request.url);
+    console.log(request.method);
+
+    switch (request.method) {
+        case "GET":
+
+            const extension = path.extname(request.url);
+            if (extension) {
+                const MIMEType = MIMETypes[extension] || "application/octet-stream";
+                fs.readFile(__dirname + "/public" + request.url, (erreur, données) => {
+                    if (erreur) {
+                        response.writeHead(404, { "Content-Type": "text/html; charset=UTF-8" });
+                        response.end("Erreur 404");
+                    } else {
+                        response.writeHead(200, { "Content-Type": MIMEType });
+                        response.end(données);
+                    }
+                })
+            } else if (request.url === "/") {
+                response.writeHead(200, { "Content-Type": "text/html; charset=UTF-8" });
+                fs.createReadStream(__dirname + "/public" + "/index.html").pipe(response)
+            } else if (request.url === "/connection") {
+                fs.readFile(__dirname + "/public/connection.html", (erreur, data) => {
+                    if (erreur) throw erreur;
+                    else {
+                        response.writeHead(200, { "Content-Type": "text/html; charset=UTF-8" });
+                        response.end(data);
+                    }
+                });
+            } else {
+                response.writeHead(404, { "Content-Type": "text/html; charset=UTF-8" });
+                response.end("<h1>Erreur 404</h1>");
             }
-            else
-            {
-                res.writeHead(404, {'Content-Type': 'text/html; charset=UTF-8'});
-                res.end('<h1>404</h1>')
-            }
-        }
-        else
-        {
-            console.log(req.url);
-            const MIMEtype = MIMEtypes[extension] || 'application/octet-stream';
-            
-            fs.readFile(path.join(__dirname, 'public', uri), (erreur,data) => {
-                if (erreur)
-                {
-                    console.error(erreur);
-                    res.statusCode = 404;
-                    res.end("cannot find" + uri);
-                    
-                }
-                else
-                {
-                    res.writeHead(200, {'Content-type': MIMEtype + "; charset=UTF-8"});
-                    res.end(data);
-                }
-            })
+            break;
         }
     }
 });

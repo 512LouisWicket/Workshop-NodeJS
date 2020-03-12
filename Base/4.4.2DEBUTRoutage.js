@@ -1,28 +1,32 @@
 "use strict";
 
-// Ton code ici
-
 const http = require("http");
-const fs = require("fs");
 const server = http.createServer();
-let index = fs.readFileSync('index.html', 'utf8');
+const fs = require("fs");
 
-server.listen(8080, () => console.log("serveur a démarré"));
+server.listen(8080, () => console.log("le serveur a démarré !"));
 
-server.on("request", (req, res) => {
-    console.log(req.url);
-    switch (req.method) {
-        case 'GET':
-            if (req.url === '/')
-            {
-                res.writeHead(200, {"Content-Type": "text/html; charset=UTF-8"});
-                res.end(index);
+server.on("request", (request, response) => {
+    console.log(request.url);
+    console.log(request.method);
+
+    switch (request.method) {
+        case "GET":
+            if (request.url === "/") {
+                response.writeHead(200, { "Content-Type": "text/html; charset=UTF-8" });
+                fs.createReadStream(__dirname + "/public" + "/index.html").pipe(response)
+            } else if (request.url === "/connection") {
+                fs.readFile(__dirname + "/public/connection.html", (erreur, data) => {
+                    if (erreur) throw erreur;
+                    else {
+                        response.writeHead(200, { "Content-Type": "text/html; charset=UTF-8" });
+                        response.end(data);
+                    }
+                });
+            } else {
+                response.writeHead(404, { "Content-Type": "text/html; charset=UTF-8" });
+                response.end("<h1>Erreur 404</h1>");
             }
-            else
-            {
-                res.writeHead(404, {'Content-Type': 'text/html; charset=UTF-8'});
-                res.end('<h1>404</h1>')
-            }
+            break;
     }
-    
 });
