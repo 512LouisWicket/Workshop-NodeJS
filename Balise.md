@@ -12,8 +12,6 @@
   - Fork & GitClone le repo du workshop
   - .gitignore
 
-- Docker
-
 - NPM
   - Qu'est-ce que NPM ?
   - Comment utiliser NPM ?
@@ -35,7 +33,6 @@
 
 - Comment servir une page ?
     - Require module filesystem : "fs"
-        - Small explanation about "fs"
     - protocle HTTP
         - modèle client-serveur (schéma Louis)
 
